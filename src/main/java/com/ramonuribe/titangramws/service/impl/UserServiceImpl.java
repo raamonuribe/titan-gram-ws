@@ -4,12 +4,14 @@ import com.ramonuribe.titangramws.io.entity.UserEntity;
 import com.ramonuribe.titangramws.io.repository.UserRepository;
 import com.ramonuribe.titangramws.service.UserService;
 import com.ramonuribe.titangramws.shared.dto.UserDto;
+import com.ramonuribe.titangramws.shared.utils.IdGeneratorUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,16 +22,32 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final IdGeneratorUtil idGenerator;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, IdGeneratorUtil idGenerator) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.idGenerator = idGenerator;
     }
 
     @Override
     public UserDto createUser(UserDto userDto) {
-        return null;
+
+        UserEntity userEntity = modelMapper.map(userDto, UserEntity.class);
+
+        userEntity.setUserId(idGenerator.generateAlphaNumericId(30));
+        userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+
+        UserEntity storedUserDetails = userRepository.save(userEntity);
+
+        UserDto returnValue = modelMapper.map(storedUserDetails, UserDto.class);
+
+        return returnValue;
+
+
     }
 
     @Override
