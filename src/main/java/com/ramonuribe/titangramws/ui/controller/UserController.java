@@ -26,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerUser(@RequestBody UserDetailsRequestModel userDetails) {
+    public String createUser(@RequestBody UserDetailsRequestModel userDetails) {
         return "User Registered";
     }
 
