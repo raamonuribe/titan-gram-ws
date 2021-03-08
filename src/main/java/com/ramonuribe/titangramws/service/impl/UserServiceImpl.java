@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -57,7 +58,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUsers() {
-        return null;
+        List<UserDto> returnValue = userRepository.findAll().stream().map(temp -> {
+            return modelMapper.map(temp, UserDto.class);
+        }).collect(Collectors.toList());
+
+        return returnValue;
     }
 
     // SECURITY METHODS //

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @RestController
 @RequestMapping("/api/v1/users")
@@ -24,8 +26,15 @@ public class UserController {
     }
 
     @GetMapping
-    public String getAllUsers() {
-        return "Find Users";
+    public List<UserRest> getAllUsers() {
+        List<UserDto> users = userService.getUsers();
+
+        List<UserRest> returnValue = users.stream().map(temp -> {
+            return modelMapper.map(temp, UserRest.class);
+        }).collect(Collectors.toList());
+
+        return returnValue;
+
     }
 
     @GetMapping("/{userId}")
