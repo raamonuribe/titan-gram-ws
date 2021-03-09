@@ -2,6 +2,7 @@ package com.ramonuribe.titangramws.io.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Table(name = "users")
@@ -17,6 +18,8 @@ public class UserEntity implements Serializable {
     private String encryptedPassword;
     private String firstName;
     private String lastName;
+    private String avatar;
+    private Date date;
 
 
     public Long getId() {
@@ -73,5 +76,21 @@ public class UserEntity implements Serializable {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

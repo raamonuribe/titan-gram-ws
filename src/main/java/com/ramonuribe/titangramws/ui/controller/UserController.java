@@ -47,7 +47,7 @@ public class UserController {
         return "Updated User";
     }
 
-    @PostMapping("/register")
+    @PostMapping
     public UserRest createUser(@RequestBody UserDetailsRequestModel userDetails) {
 
         UserDto userDto = modelMapper.map(userDetails, UserDto.class);

@@ -1,6 +1,7 @@
 package com.ramonuribe.titangramws.shared.dto;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class UserDto implements Serializable {
 
@@ -14,6 +15,8 @@ public class UserDto implements Serializable {
     private String encryptedPassword;
     private String username;
     private String email;
+    private String avatar;
+    private Date date;
 
     public Long getId() {
         return id;
@@ -77,5 +80,21 @@ public class UserDto implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
