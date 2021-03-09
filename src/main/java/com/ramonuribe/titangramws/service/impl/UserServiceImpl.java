@@ -4,6 +4,7 @@ import com.ramonuribe.titangramws.io.entity.UserEntity;
 import com.ramonuribe.titangramws.io.repository.UserRepository;
 import com.ramonuribe.titangramws.service.UserService;
 import com.ramonuribe.titangramws.shared.dto.UserDto;
+import com.ramonuribe.titangramws.shared.utils.GravatarUtil;
 import com.ramonuribe.titangramws.shared.utils.IdGeneratorUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,13 +27,15 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final IdGeneratorUtil idGenerator;
+    private final GravatarUtil gravatar;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, IdGeneratorUtil idGenerator) {
+    public UserServiceImpl(UserRepository userRepository, ModelMapper modelMapper, BCryptPasswordEncoder bCryptPasswordEncoder, IdGeneratorUtil idGenerator, GravatarUtil gravatar) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.idGenerator = idGenerator;
+        this.gravatar = gravatar;
     }
 
     @Override
@@ -41,6 +45,7 @@ public class UserServiceImpl implements UserService {
 
         userEntity.setUserId(idGenerator.generateAlphaNumericId(30));
         userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
+        userEntity.setAvatar(gravatar.generateGravatarImageUrl(userDto.getEmail()));
 
         UserEntity storedUserDetails = userRepository.save(userEntity);
 

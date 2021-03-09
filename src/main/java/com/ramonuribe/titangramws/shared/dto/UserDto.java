@@ -16,7 +16,6 @@ public class UserDto implements Serializable {
     private String username;
     private String email;
     private String avatar;
-    private Date date;
 
     public Long getId() {
         return id;
@@ -88,13 +87,5 @@ public class UserDto implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 }
