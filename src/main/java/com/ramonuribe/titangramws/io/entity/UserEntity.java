@@ -3,6 +3,7 @@ package com.ramonuribe.titangramws.io.entity;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -20,8 +21,11 @@ public class UserEntity implements Serializable {
     private String lastName;
     private String avatar;
 
-    @OneToOne(mappedBy = "userDetails")
+    @OneToOne(mappedBy = "userDetails", cascade = CascadeType.ALL)
     private ProfileEntity profile;
+
+    @OneToMany(mappedBy = "userDetails", cascade = CascadeType.ALL)
+    private List<PostEntity> posts;
 
 
     public Long getId() {
@@ -86,5 +90,21 @@ public class UserEntity implements Serializable {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public ProfileEntity getProfile() {
+        return profile;
+    }
+
+    public void setProfile(ProfileEntity profile) {
+        this.profile = profile;
+    }
+
+    public List<PostEntity> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<PostEntity> posts) {
+        this.posts = posts;
     }
 }

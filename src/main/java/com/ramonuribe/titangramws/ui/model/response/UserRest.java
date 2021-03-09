@@ -1,11 +1,14 @@
 package com.ramonuribe.titangramws.ui.model.response;
 
+import java.util.List;
+
 public class UserRest {
     private String userId;
     private String username;
     private String firstName;
     private String lastName;
     private String avatar;
+    private List<PostRest> posts;
 
 
     public String getUserId() {
@@ -46,5 +49,13 @@ public class UserRest {
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public List<PostRest> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<PostRest> posts) {
+        this.posts = posts;
     }
 }
