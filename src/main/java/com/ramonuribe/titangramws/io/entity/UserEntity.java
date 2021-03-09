@@ -20,6 +20,9 @@ public class UserEntity implements Serializable {
     private String lastName;
     private String avatar;
 
+    @OneToOne(mappedBy = "userDetails")
+    private ProfileEntity profile;
+
 
     public Long getId() {
         return id;
