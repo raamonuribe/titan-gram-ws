@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/v1/users/{userId}/profiles")
 public class ProfileController {
@@ -39,6 +42,17 @@ public class ProfileController {
         ProfileDto updatedProfile = profileService.updateProfile(userId, profileId, profileDto);
 
         ProfileRest returnValue = modelMapper.map(updatedProfile, ProfileRest.class);
+
+        return returnValue;
+    }
+
+    @GetMapping
+    public List<ProfileRest> getProfiles() {
+        List<ProfileDto> profiles = profileService.getProfiles();
+
+        List<ProfileRest> returnValue = profiles.stream().map(temp -> {
+            return modelMapper.map(temp, ProfileRest.class);
+        }).collect(Collectors.toList());
 
         return returnValue;
     }

@@ -12,6 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ProfileServiceImpl  implements ProfileService {
 
@@ -60,6 +63,17 @@ public class ProfileServiceImpl  implements ProfileService {
         ProfileEntity updatedProfile = profileRepository.save(profileEntity);
 
         ProfileDto returnValue = modelMapper.map(updatedProfile, ProfileDto.class);
+
+        return returnValue;
+    }
+
+    @Override
+    public List<ProfileDto> getProfiles() {
+        List<ProfileEntity> profiles = profileRepository.findAll();
+
+        List<ProfileDto> returnValue = profiles.stream().map(temp -> {
+            return modelMapper.map(temp, ProfileDto.class);
+        }).collect(Collectors.toList());
 
         return returnValue;
     }
