@@ -51,4 +51,13 @@ public class PostController {
     public void deletePost(@PathVariable String userId, @PathVariable String postId) {
         postService.deletePost(userId, postId);
     }
+
+    @GetMapping("/{postId}")
+    public PostRest getByPostId(@PathVariable String userId, @PathVariable String postId) {
+        PostDto postDto = postService.getByPostId(userId, postId);
+
+        PostRest returnValue = modelMapper.map(postDto, PostRest.class);
+
+        return returnValue;
+    }
 }

@@ -68,4 +68,16 @@ public class PostServiceImpl implements PostService {
 
         postRepository.delete(postEntity);
     }
+
+    @Override
+    public PostDto getByPostId(String userId, String postId) {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        if (userEntity == null) throw new RuntimeException("User not found.");
+        PostEntity postEntity = postRepository.findByPostId(postId);
+        if (postEntity == null) throw new RuntimeException("Post not found.");
+
+        PostDto returnValue = modelMapper.map(postEntity, PostDto.class);
+
+        return returnValue;
+    }
 }
