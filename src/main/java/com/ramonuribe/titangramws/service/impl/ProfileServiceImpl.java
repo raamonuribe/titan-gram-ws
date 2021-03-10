@@ -77,4 +77,16 @@ public class ProfileServiceImpl  implements ProfileService {
 
         return returnValue;
     }
+
+    @Override
+    public ProfileDto getByProfileId(String userId, String profileId) {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        if(userEntity == null) throw new RuntimeException("User not found.");
+        ProfileEntity profileEntity = profileRepository.findByProfileId(profileId);
+        if (profileEntity == null) throw new RuntimeException("Profile not found.");
+
+        ProfileDto returnValue = modelMapper.map(profileEntity, ProfileDto.class);
+
+        return returnValue;
+    }
 }

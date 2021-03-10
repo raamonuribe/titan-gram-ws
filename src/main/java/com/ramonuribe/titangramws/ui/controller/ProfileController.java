@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/v1/users/{userId}/profiles")
+@RequestMapping("/api/v1")
 public class ProfileController {
     private final ModelMapper modelMapper;
     private final ProfileService profileService;
@@ -23,7 +23,7 @@ public class ProfileController {
         this.profileService = profileService;
     }
 
-    @PostMapping
+    @PostMapping("/users/{userId}/profiles")
     public ProfileRest createProfile(@PathVariable String userId, @RequestBody ProfileDetailsRequestModel profileDetails) {
 
         ProfileDto profileDto =  modelMapper.map(profileDetails, ProfileDto.class);
@@ -34,7 +34,7 @@ public class ProfileController {
         return returnValue;
     }
 
-    @PutMapping("/{profileId}")
+    @PutMapping("/users/{userId}/profiles/{profileId}")
     public ProfileRest updateProfile(@PathVariable String userId, @PathVariable String profileId,
                                      @RequestBody ProfileDetailsRequestModel profileDetails) {
 
@@ -46,13 +46,22 @@ public class ProfileController {
         return returnValue;
     }
 
-    @GetMapping
-    public List<ProfileRest> getProfiles() {
+    @GetMapping("/profiles")
+    public List<ProfileRest> getAllProfiles() {
         List<ProfileDto> profiles = profileService.getProfiles();
 
         List<ProfileRest> returnValue = profiles.stream().map(temp -> {
             return modelMapper.map(temp, ProfileRest.class);
         }).collect(Collectors.toList());
+
+        return returnValue;
+    }
+
+    @GetMapping("/users/{userId}/profiles/{profileId}")
+    public ProfileRest getByProfileId(@PathVariable String userId, @PathVariable String profileId) {
+        ProfileDto profileDto = profileService.getByProfileId(userId, profileId);
+
+        ProfileRest returnValue = modelMapper.map(profileDto, ProfileRest.class);
 
         return returnValue;
     }
