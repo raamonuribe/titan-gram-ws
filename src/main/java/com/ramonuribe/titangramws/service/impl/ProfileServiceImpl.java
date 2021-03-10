@@ -10,7 +10,6 @@ import com.ramonuribe.titangramws.shared.dto.UserDto;
 import com.ramonuribe.titangramws.shared.utils.IdGeneratorUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -44,8 +43,24 @@ public class ProfileServiceImpl  implements ProfileService {
 
         ProfileDto returnValue = modelMapper.map(createdProfile, ProfileDto.class);
 
+
         return returnValue;
+    }
 
+    @Override
+    public ProfileDto updateProfile(String userId, String profileId, ProfileDto profileDto) {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        if(userEntity == null) throw new RuntimeException("User not found.");
+        ProfileEntity profileEntity = profileRepository.findByProfileId(profileId);
+        if (profileEntity == null) throw new RuntimeException("Profile not found.");
 
+        profileEntity.setBio(profileDto.getBio());
+        profileEntity.setWebsite(profileDto.getWebsite());
+
+        ProfileEntity updatedProfile = profileRepository.save(profileEntity);
+
+        ProfileDto returnValue = modelMapper.map(updatedProfile, ProfileDto.class);
+
+        return returnValue;
     }
 }

@@ -30,4 +30,16 @@ public class ProfileController {
 
         return returnValue;
     }
+
+    @PutMapping("/{profileId}")
+    public ProfileRest updateProfile(@PathVariable String userId, @PathVariable String profileId,
+                                     @RequestBody ProfileDetailsRequestModel profileDetails) {
+
+        ProfileDto profileDto = modelMapper.map(profileDetails, ProfileDto.class);
+        ProfileDto updatedProfile = profileService.updateProfile(userId, profileId, profileDto);
+
+        ProfileRest returnValue = modelMapper.map(updatedProfile, ProfileRest.class);
+
+        return returnValue;
+    }
 }
