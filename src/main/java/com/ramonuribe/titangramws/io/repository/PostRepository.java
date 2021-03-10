@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PostRepository extends CrudRepository<PostEntity, Long> {
     List<PostEntity> findAll();
+    PostEntity findByPostId(String postId);
 }

@@ -6,6 +6,7 @@ import com.ramonuribe.titangramws.ui.model.request.PostDetailsRequestModel;
 import com.ramonuribe.titangramws.ui.model.response.PostRest;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +45,10 @@ public class PostController {
         }).collect(Collectors.toList());
 
         return returnValue;
+    }
+
+    @DeleteMapping("/{postId}")
+    public void deletePost(@PathVariable String userId, @PathVariable String postId) {
+        postService.deletePost(userId, postId);
     }
 }
