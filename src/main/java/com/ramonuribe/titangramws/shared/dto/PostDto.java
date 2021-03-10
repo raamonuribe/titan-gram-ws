@@ -1,6 +1,7 @@
 package com.ramonuribe.titangramws.shared.dto;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class PostDto implements Serializable {
     private static final long serialVersionUID = 5407527944556839323L;
@@ -10,6 +11,7 @@ public class PostDto implements Serializable {
     private UserDto userDetails;
     private String caption;
     private String imageUrl;
+    List<CommentDto> comments;
 
     public Long getId() {
         return id;

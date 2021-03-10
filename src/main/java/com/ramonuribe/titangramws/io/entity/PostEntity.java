@@ -4,6 +4,7 @@ import com.ramonuribe.titangramws.shared.dto.UserDto;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "posts")
@@ -20,6 +21,9 @@ public class PostEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity userDetails;
+
+    @OneToMany(mappedBy = "postDetails", cascade = CascadeType.ALL)
+    private List<CommentEntity> comments;
 
     public Long getId() {
         return id;

@@ -27,6 +27,9 @@ public class UserEntity implements Serializable {
     @OneToMany(mappedBy = "userDetails", cascade = CascadeType.ALL)
     private List<PostEntity> posts;
 
+    @OneToMany(mappedBy = "userDetails", cascade = CascadeType.ALL)
+    private List<CommentEntity> comments;
+
 
     public Long getId() {
         return id;

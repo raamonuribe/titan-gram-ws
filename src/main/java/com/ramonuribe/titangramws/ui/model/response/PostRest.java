@@ -1,10 +1,13 @@
 package com.ramonuribe.titangramws.ui.model.response;
 
+import java.util.List;
+
 public class PostRest {
     private String postId;
     private String imageUrl;
     private String caption;
     private String userId;
+    private List<CommentRest> comments;
 
     public String getPostId() {
         return postId;
@@ -36,5 +39,13 @@ public class PostRest {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public List<CommentRest> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentRest> comments) {
+        this.comments = comments;
     }
 }

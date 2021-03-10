@@ -8,6 +8,7 @@ public class UserRest {
     private String firstName;
     private String lastName;
     private String avatar;
+    private List<PostRest> posts;
 
 
     public String getUserId() {
@@ -50,5 +51,11 @@ public class UserRest {
         this.avatar = avatar;
     }
 
+    public List<PostRest> getPosts() {
+        return posts;
+    }
 
+    public void setPosts(List<PostRest> posts) {
+        this.posts = posts;
+    }
 }
