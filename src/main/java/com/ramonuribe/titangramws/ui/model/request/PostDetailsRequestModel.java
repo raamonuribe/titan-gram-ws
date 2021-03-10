@@ -1,15 +1,15 @@
 package com.ramonuribe.titangramws.ui.model.request;
 
 public class PostDetailsRequestModel {
-    private String postUrl;
+    private String imageUrl;
     private String caption;
 
-    public String getPostUrl() {
-        return postUrl;
+    public String getImageUrl() {
+        return imageUrl;
     }
 
-    public void setPostUrl(String postUrl) {
-        this.postUrl = postUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getCaption() {

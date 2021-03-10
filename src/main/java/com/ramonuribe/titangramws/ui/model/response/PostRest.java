@@ -30,4 +30,11 @@ public class PostRest {
         this.caption = caption;
     }
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 }
