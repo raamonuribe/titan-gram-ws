@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/api/v1/users/{userId}/posts")
 public class PostController {
@@ -28,7 +31,17 @@ public class PostController {
         PostDto createdPost = postService.createPost(postDto, userId);
 
         PostRest returnValue = modelMapper.map(createdPost, PostRest.class);
-        returnValue.setUserId(userId);
+
+        return returnValue;
+    }
+
+    @GetMapping
+    public List<PostRest> getPosts() {
+        List<PostDto> posts = postService.getPosts();
+
+        List<PostRest> returnValue = posts.stream().map(temp -> {
+            return modelMapper.map(temp, PostRest.class);
+        }).collect(Collectors.toList());
 
         return returnValue;
     }

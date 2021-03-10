@@ -12,6 +12,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -41,6 +44,17 @@ public class PostServiceImpl implements PostService {
         PostEntity createdPost = postRepository.save(postEntity);
 
         PostDto returnValue = modelMapper.map(createdPost, PostDto.class);
+
+        return returnValue;
+    }
+
+    @Override
+    public List<PostDto> getPosts() {
+        List<PostEntity> posts = postRepository.findAll();
+
+        List<PostDto> returnValue = posts.stream().map(temp -> {
+            return modelMapper.map(temp, PostDto.class);
+        }).collect(Collectors.toList());
 
         return returnValue;
     }
