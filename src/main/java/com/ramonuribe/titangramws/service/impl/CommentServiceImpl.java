@@ -58,6 +58,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteComment(String userId, String postId, String commentId) {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        if (userEntity == null) throw new RuntimeException("User not found.");
+        PostEntity postEntity = postRepository.findByPostId(postId);
+        if (postEntity == null) throw new RuntimeException("Post not found.");
+        CommentEntity commentEntity = commentRepository.findByCommentId(commentId);
+        if (commentEntity == null) throw new RuntimeException("Comment not found");
 
+        commentRepository.delete(commentEntity);
     }
 }

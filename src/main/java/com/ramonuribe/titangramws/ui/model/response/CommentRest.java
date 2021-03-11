@@ -2,6 +2,7 @@ package com.ramonuribe.titangramws.ui.model.response;
 
 public class CommentRest {
     private String content;
+    private String commentId;
     private String userId;
     private String postId;
 
@@ -27,5 +28,13 @@ public class CommentRest {
 
     public void setPostId(String postId) {
         this.postId = postId;
+    }
+
+    public String getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
     }
 }
