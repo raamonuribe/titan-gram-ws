@@ -110,4 +110,12 @@ public class UserEntity implements Serializable {
     public void setPosts(List<PostEntity> posts) {
         this.posts = posts;
     }
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentEntity> comments) {
+        this.comments = comments;
+    }
 }

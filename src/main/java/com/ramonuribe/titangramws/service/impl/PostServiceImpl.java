@@ -5,6 +5,7 @@ import com.ramonuribe.titangramws.io.entity.UserEntity;
 import com.ramonuribe.titangramws.io.repository.PostRepository;
 import com.ramonuribe.titangramws.io.repository.UserRepository;
 import com.ramonuribe.titangramws.service.PostService;
+import com.ramonuribe.titangramws.shared.dto.CommentDto;
 import com.ramonuribe.titangramws.shared.dto.PostDto;
 import com.ramonuribe.titangramws.shared.dto.UserDto;
 import com.ramonuribe.titangramws.shared.utils.IdGeneratorUtil;
@@ -12,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

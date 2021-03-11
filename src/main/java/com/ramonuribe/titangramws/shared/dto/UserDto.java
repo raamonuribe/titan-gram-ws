@@ -98,4 +98,5 @@ public class UserDto implements Serializable {
     public void setPosts(List<PostDto> posts) {
         this.posts = posts;
     }
+
 }

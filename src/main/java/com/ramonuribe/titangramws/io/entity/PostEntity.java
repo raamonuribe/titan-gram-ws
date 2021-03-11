@@ -64,4 +64,12 @@ public class PostEntity implements Serializable {
     public void setUserDetails(UserEntity userDetails) {
         this.userDetails = userDetails;
     }
+
+    public List<CommentEntity> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentEntity> comments) {
+        this.comments = comments;
+    }
 }
