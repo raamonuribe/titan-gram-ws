@@ -60,6 +60,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.addExposedHeader("UserID");
+        configuration.addExposedHeader(SecurityConstants.HEADER_STRING);
 
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
